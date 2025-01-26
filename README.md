@@ -1,56 +1,102 @@
-**W&D Fullstack Engineering Challenge**
+# W&D Challenge
 
-Welcome to our Lead Fullstack Engineering Challenge repository. This document will guide you through the challenge. Please fork this repo before you begin, as we will evaluate the code on your fork.
+## Overview
 
-**Challenge Overview:**
+This project is application that enables users to search for properties in a database with advanced filters. Users can log in, search properties, view results on a map, and navigate through paginated results. The application is containerized using Docker for consistent deployment.
 
-Design and implement a system that enables users to search for properties in the database using filters. Users should be able to log in, search for properties with filters, and view them on a map (Google Maps, Leaflet, or similar).
+---
 
-**Requirements:**
+## Features
 
-1. **User Authentication**:
-    - Use a hardcoded basic authentication with admin/admin user/password.
+- **User Authentication**: Basic login functionality with pre-defined credentials (`admin/admin`).
+- **Property Search**: Advanced search functionality with filters like address, class description, market value, building use, and size.
+- **Sorting**: Results can be sorted by market value or square footage in ascending or descending order.
+- **Map View**: Interactive map displaying property locations with clickable markers.
+- **Pagination**: Efficient pagination for managing large datasets.
+- **Performance Optimizations**: Asynchronous backend processing and efficient database queries.
 
-2. **Database Design and Implementation**: 
-    - We recommend using SQLite for the sake of simplicity, but feel free to choose another database if you have a specific preference. Justify your choice.
-    - Initiate the database using the data from the provided Excel file. Automation is not necessary. 
+---
 
-3. **Backend Development**:
-    - Develop a backend in Python to interact with the database.
-    - Choose a suitable Python framework (e.g., Flask, Django, FastAPI, Falcon) and justify your choice.
+## Technology Stack
 
-4. **Frontend Development**:
-    - Implement the frontend using Vue.js.
-    - Once logged in, users should see the property list.
-    - Each property in the list should display:
-        - Full Address
-        - Class Description
-        - Estimated Market Value
-        - Building Use
-        - Building Square Feet
-    - Users should be able to search for properties from the database.
-        - Users should be able to search on the following values:
-            - Full Address
-            - Class
-            - Estimated_Market_Value
-            - BLDG_USE
-            - BUILDING_SQ_FT
-    - User should be able to see the properties on a map.
-    - Each marker on the map should be clickable and show the property ID.
-    - The map should be centered on the properties.
-    
+### Backend: FastAPI
+- **Features**:
+  - High performance through asynchronous capabilities.
+  - Automatic interactive API documentation (Swagger & ReDoc).
+  - Scalable architecture for handling multiple concurrent requests.
+- **Tools**: SQLAlchemy for ORM, SQLite for database, and Pydantic for validation.
 
-5. **Documentation**:
-    - Provide a brief README detailing how to set up and run your application.
+### Frontend: Vue.js
+- **Features**:
+  - Reactive and component-based architecture.
+  - Lightweight framework with excellent performance.
+  - Rich ecosystem for seamless development.
+  - Easy integration with APIs using Axios.
 
-6. **Running / Deployment**:
-    - Package the application using Docker or Docker Compose.
-    - Include a `run.sh` script to simplify the running process: `docker run ...` or `docker-compose up ...`
-  
-7. **Bonus**:
-    - **Optimization**: Propose at least one optimization that can help the application perform better under increased data loads.
-    - **Additional Feature**: Propose a feature you believe would enhance the user's experience while searching for properties.
-  
-**Important Note:**
-Please avoid using existing boilerplates to build the API or the frontend. We want to evaluate your technical skills and ability to design and implement solutions from scratch. Using boilerplates may hinder this evaluation process.
+### Containerization: Docker
+- **Advantages**:
+  - Simplifies deployment with consistent environments.
+  - Ensures compatibility across development, staging, and production environments.
 
+---
+
+## Requirements
+
+### Backend:
+- Python 3.8+
+- FastAPI
+- SQLAlchemy
+- SQLite (or another database)
+- Uvicorn (ASGI server)
+- Docker
+
+### Frontend:
+- Node.js 14+
+- Vue.js 3.x
+- Axios
+
+---
+
+## Installation Instructions
+
+### Clone the Repository
+1. Clone the repository to your local machine:
+   ```bash
+   git clone git@github.com:Bola-Nasr/challenge.git
+   cd challenge
+   
+# Using Docker Compose
+2. Start the application:
+   ```bash
+   
+   cd backend && python3 load_data.py
+   cd .. && docker-compose up --build
+   
+3. Open your browser:
+
+    Frontend: http://localhost
+
+    Backend API: http://localhost:8000/docs (Swagger API docs)
+
+# Using Script
+2. Run the provided script:
+    ```bash
+   ./run.sh
+   
+3. Open your browser:
+
+   Frontend: http://localhost
+
+   Backend API: http://localhost:8000/docs (Swagger API docs)
+
+## Additional Information
+- **Database Initialization:** The database is initialized using data from a provided Excel file. This step is manual and should be done before running the application.
+- **Pagination:** The backend API supports pagination using query parameters like `limit` and `offset`.
+---
+
+## Optimization Suggestions
+- **Database Indexing:** Add indexes to frequently queried fields to improve search performance.
+- **Caching:** Use caching (e.g., Redis) for frequently accessed data to reduce load times.
+- **Load Balancing:** Add a load balancer to distribute traffic across multiple backend instances.
+- **Static Files:** Ensure static assets are served with long-term caching headers.
+- **Security:** Implement HTTPS, rate limiting, and input validation to enhance security.
